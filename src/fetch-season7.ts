@@ -86,7 +86,7 @@ async function main() {
     const csvContent = addresses.join('\n');
 
     // Write to file
-    const outputPath = path.join(__dirname, '..', 'season7users.csv');
+    const outputPath = path.join(__dirname, '../data', 'season7users.csv');
     fs.writeFileSync(outputPath, csvContent);
 
     console.log(`Success! Exported ${addresses.length} addresses to season7users.csv`);
