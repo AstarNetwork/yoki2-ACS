@@ -10,9 +10,9 @@ interface Item {
 }
 
 // Constants
-const DEFI_ID = 21;
+const DEFI_ID = 41;
 const ACS_AMOUNT_SEASON7 = 2000000;
-const SEASON7_USERS = 3227;
+const SEASON7_USERS = 5485;
 const ACS_AMOUNT = Math.floor(ACS_AMOUNT_SEASON7 / SEASON7_USERS);
 const DESCRIPTION = "Yoki2 season 7";
 

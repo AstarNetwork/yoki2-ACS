@@ -19,16 +19,17 @@ interface SignatureParams {
   apiSecret: string;
 }
 
-// Load your API key (keep this secret!)
-const API_SECRET = process.env.TEST_ASC_API_KEY;
+// Change or check this part for any season
+const API_SECRET = process.env.ACS_API_KEY_YOKI2;
+// const ACS_ENDPOINT = 'https://test4.xzsean.eu.org/acs/addDiscretionaryPointsBatch'
+const ACS_ENDPOINT = 'https://acs-api.astar.network/acs/addDiscretionaryPointsBatch'
+const users: AcsSignatureItem[] = JSON.parse(fs.readFileSync('data/season7users.json', 'utf8'));
 
 if (!API_SECRET) {
-  console.error('Error: TEST_ASC_API_KEY not found in .env file');
+  console.error('Error: ASC_API_KEY not found in .env file');
   process.exit(1);
 }
-
-// Load your users data
-const users: AcsSignatureItem[] = JSON.parse(fs.readFileSync('data/season7users.json', 'utf8'));
+console.log(`sending ${users.length} users to ACS server ${ACS_ENDPOINT}`);
 
 // Generate nonce
 function generateNonce(): string {
@@ -72,7 +73,7 @@ async function sendData(): Promise<void> {
 
   try {
     const response = await axios.post(
-      'https://test4.xzsean.eu.org/acs/addDiscretionaryPointsBatch',
+      ACS_ENDPOINT,
       users,
       {
         headers: {
