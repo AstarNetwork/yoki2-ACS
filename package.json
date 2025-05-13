@@ -12,7 +12,8 @@
     "season2json": "ts-node src/season2json.ts",
     "send": "ts-node src/send.ts",
     "fetch-yokis": "ts-node src/fetch-yokis.ts",
-    "fetch-graph": "ts-node src/fetch-yokis-graphql.ts"
+    "graph-yokis": "ts-node src/graph-yokis.ts",
+    "compare": "ts-node src/compare-csv.ts"
   },
   "dependencies": {
     "axios": "^1.9.0",

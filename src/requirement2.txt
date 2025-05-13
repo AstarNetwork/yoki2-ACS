@@ -1,0 +1,59 @@
+Create new ts script.
+Use graphql
+
+Script needs to collect all users who minted all of the YOKIS tokens up until timestamp
+const YOKIS = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 101, 201, 301, 401, 501, 601, 701, 801, 901, 1001, 1101, 1201];
+CUTOFF_TIMESTAMP=1746968400000
+YOKI_CONTRACT= 0x80E041b16a38f4caa1d0137565B37FD71b2f1E2b
+chain= Soneium
+
+* There are many transactions and the response will be in pages.
+* Only "to" address that have collected all 24 tokens will be recorded and stored in csv file "data/yokiSeason8.csv"
+* Tokens below tokenId=13 are ignored. There are no other tokens beside those defined in YOKIS array and those below 13.
+* If "from" address is !== 0x0 
+  - decrease amount for from address
+  - do NOT increase amount for "to" address
+* Tokens minted after CUTOFF_TIMESTAMP are ignored
+* Endpoint to use 
+localhost:8000/subgraphs/name/yoki2/graphql
+
+
+example query and response
+
+query MyQuery {
+  transferSingles(first: 10, where: {tokenId_gt: "13"}) {
+    from
+    to
+    tokenId
+    blockTimestamp
+    value
+    season
+    transactionHash
+  }
+}
+
+
+{
+  "data": {
+    "transferSingles": [
+      {
+        "from": "0x0000000000000000000000000000000000000000",
+        "to": "0x9390a3f5c4ecedb9020a5a88ce35296aa19bdaa9",
+        "tokenId": "300",
+        "blockTimestamp": "1745906555",
+        "value": "1",
+        "season": 8,
+        "transactionHash": "0x000014dca531b765d956324e6a230e20afd8e9f7e4ef0e780f0a6245731d09f3"
+      },
+      {
+        "from": "0x0000000000000000000000000000000000000000",
+        "to": "0x133ade824a2a5783fc8eb4811098ba241bb1d138",
+        "tokenId": "500",
+        "blockTimestamp": "1746041111",
+        "value": "1",
+        "season": 8,
+        "transactionHash": "0x00002dceb428254c4cda60d3b3ea90ff031322572c9493c44f6da8b2ce658f5d"
+      }
+    ]
+  }
+}

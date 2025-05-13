@@ -6,12 +6,14 @@ import * as path from 'path';
 const GRAPH_API_URL = 'http://localhost:4350/graphql';
 
 // Query with pagination - updated to match the actual schema
+// Updated query with case insensitive check on address field if supported
 const SEASON8_QUERY = `
 query GetYokiPerSeasons($limit: Int!, $offset: Int!) {
   yokiPerSeasons(
     where: {season_eq: 8, hasAll_eq: true}
     limit: $limit
     offset: $offset
+    orderBy: address_ASC
   ) {
     address
   }
