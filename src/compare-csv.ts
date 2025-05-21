@@ -2,8 +2,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 // Hardcoded input and output paths
-const FIRST_FILE_PATH = 'data/_season1users.csv';
-const SECOND_FILE_PATH = 'data/season8users.csv';
+const FIRST_FILE_PATH = 'data/_season9users_not_in_season8users.csv';
+const SECOND_FILE_PATH = 'data/missing-in-season8.csv';
 const OUTPUT_DIR = 'compares';
 
 /**

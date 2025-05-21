@@ -12,6 +12,7 @@ query GetYokiPerSeasons($limit: Int!, $offset: Int!) {
     where: {season_eq: 9, hasAll_eq: true}
     limit: $limit
     offset: $offset
+    orderBy: address_ASC
   ) {
     address
   }
