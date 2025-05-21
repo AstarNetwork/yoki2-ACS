@@ -13,7 +13,7 @@ interface Item {
 const DEFI_ID = 41;
 const ACS_AMOUNT_PER_SEASON = 2000000;
 const BATCH_SIZE = 1900; // Max addresses per file
-const DESCRIPTION = "Yoki2 season 7";
+const DESCRIPTION = "Yoki2 season 8";
 
 /**
  * Split an array into chunks of specified size
@@ -29,7 +29,7 @@ function chunkArray<T>(array: T[], chunkSize: number): T[][] {
 async function main() {
   try {
     // Resolve paths relative to this script
-    const csvPath = path.resolve(__dirname, '../data/season7users.csv');
+    const csvPath = path.resolve(__dirname, '../data/season8users.csv');
     const outputDir = path.resolve(__dirname, '../data');
     
     console.log(`Reading addresses from ${csvPath}`);
@@ -65,7 +65,7 @@ async function main() {
     // Write each chunk to a separate JSON file
     chunks.forEach((chunk, index) => {
       const fileNumber = index + 1;
-      const outputPath = path.resolve(outputDir, `season7users-${fileNumber}.json`);
+      const outputPath = path.resolve(outputDir, `season8users-${fileNumber}.json`);
       
       fs.writeFileSync(
         outputPath,

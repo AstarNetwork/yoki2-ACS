@@ -6,13 +6,12 @@
   "scripts": {
     "build": "tsc",
     "season7": "ts-node src/fetch-season7.ts",
+    "squid1": "ts-node src/squid-season1-OG.ts",
     "squid7": "ts-node src/squid-season7.ts",
     "squid8": "ts-node src/squid-season8.ts",
     "squid9": "ts-node src/squid-season9.ts",
     "season2json": "ts-node src/season2json.ts",
     "send": "ts-node src/send.ts",
-    "fetch-yokis": "ts-node src/fetch-yokis.ts",
-    "graph-yokis": "ts-node src/graph-yokis.ts",
     "compare": "ts-node src/compare-csv.ts"
   },
   "dependencies": {
