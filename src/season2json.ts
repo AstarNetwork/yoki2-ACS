@@ -10,17 +10,27 @@ interface Item {
 }
 
 // Constants
-const DEFI_ID = 21;
-const ACS_AMOUNT_SEASON7 = 2000000;
-const SEASON7_USERS = 3227;
-const ACS_AMOUNT = Math.floor(ACS_AMOUNT_SEASON7 / SEASON7_USERS);
-const DESCRIPTION = "Yoki2 season 7";
+const DEFI_ID = 41;
+const ACS_AMOUNT_PER_SEASON = 2000000;
+const BATCH_SIZE = 1900; // Max addresses per file
+const DESCRIPTION = "Yoki2 season 8";
+
+/**
+ * Split an array into chunks of specified size
+ */
+function chunkArray<T>(array: T[], chunkSize: number): T[][] {
+  const chunks: T[][] = [];
+  for (let i = 0; i < array.length; i += chunkSize) {
+    chunks.push(array.slice(i, i + chunkSize));
+  }
+  return chunks;
+}
 
 async function main() {
   try {
     // Resolve paths relative to this script
-    const csvPath = path.resolve(__dirname, '../data/season7users.csv');
-    const outputPath = path.resolve(__dirname, '../data/season7users.json');
+    const csvPath = path.resolve(__dirname, '../data/season8users.csv');
+    const outputDir = path.resolve(__dirname, '../data');
     
     console.log(`Reading addresses from ${csvPath}`);
     
@@ -35,6 +45,12 @@ async function main() {
     
     console.log(`Found ${addresses.length} addresses`);
     
+    // Calculate ACS amount per user based on total addresses
+    const usersPerSeason = addresses.length;
+    const ACS_AMOUNT = Math.floor(ACS_AMOUNT_PER_SEASON / usersPerSeason);
+    
+    console.log(`ACS amount per user: ${ACS_AMOUNT}`);
+    
     // Create items from addresses
     const items: Item[] = addresses.map(address => ({
       userAddress: address,
@@ -43,14 +59,24 @@ async function main() {
       description: DESCRIPTION
     }));
     
-    // Write to JSON file
-    fs.writeFileSync(
-      outputPath,
-      JSON.stringify(items, null, 2),
-      'utf-8'
-    );
+    // Split items into chunks of BATCH_SIZE
+    const chunks = chunkArray(items, BATCH_SIZE);
     
-    console.log(`Successfully wrote ${items.length} items to ${outputPath}`);
+    // Write each chunk to a separate JSON file
+    chunks.forEach((chunk, index) => {
+      const fileNumber = index + 1;
+      const outputPath = path.resolve(outputDir, `season8users-${fileNumber}.json`);
+      
+      fs.writeFileSync(
+        outputPath,
+        JSON.stringify(chunk, null, 2),
+        'utf-8'
+      );
+      
+      console.log(`[${fileNumber}/${chunks.length}] Wrote ${chunk.length} items to ${outputPath}`);
+    });
+    
+    console.log(`Successfully created ${chunks.length} JSON files with ${addresses.length} total addresses`);
   } catch (error: any) {
     console.error('Error processing CSV to JSON:', error.message);
     process.exit(1);
