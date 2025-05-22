@@ -2,9 +2,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 // Hardcoded input and output paths
-const FIRST_FILE_PATH = 'data/_season1users.csv';
-const SECOND_FILE_PATH = 'data/season8users.csv';
-const OUTPUT_DIR = 'compares';
+const FIRST_FILE_PATH = 'data/season8users.csv';
+const SECOND_FILE_PATH = 'data/season9users.csv';
+const OUTPUT_DIR = 'compares2';
 
 /**
  * Compares two CSV files of Ethereum addresses and outputs the differences
