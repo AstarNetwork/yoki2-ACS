@@ -23,7 +23,7 @@ interface SignatureParams {
 const API_SECRET = process.env.ACS_API_KEY_YOKI2;
 // const ACS_ENDPOINT = 'https://test4.xzsean.eu.org/acs/addDiscretionaryPointsBatch'
 const ACS_ENDPOINT = 'https://acs-api.astar.network/acs/addDiscretionaryPointsBatch'
-const users: AcsSignatureItem[] = JSON.parse(fs.readFileSync('data/season8users-4.json', 'utf8'));
+const users: AcsSignatureItem[] = JSON.parse(fs.readFileSync('data/season9missing8-3.json', 'utf8'));
 
 if (!API_SECRET) {
   console.error('Error: ASC_API_KEY not found in .env file');
